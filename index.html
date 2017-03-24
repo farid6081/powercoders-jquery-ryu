@@ -24,7 +24,7 @@
             left: 450px;
             /* define the appropriate styles for the animated hadouken */
         }
-        #ryu-div .terry {
+        #ryu-div .anna {
           position: absolute;
           right: 0;
         }
@@ -36,7 +36,7 @@
 <body>
     <div id="ryu-div">
         <img class="ryu" src="./images/ryu_stand_still.png">
-        <img class="terry" src="./images/terry.gif" style="height: 500px">
+        <img class="anna" src="./images/anna.gif" style="height: 500px">
 
     </div>
     <div id="hadouken-count">
@@ -59,7 +59,6 @@
                     $(this).attr('src', ryuImages.still);
                 })
             $('#ryu-div .ryu').click(function() {
-                count++;
                 $(this).attr('src', ryuImages.action);
                 var newImage = $('<img>');
                 newImage.attr('src', './images/hadouken.gif');
@@ -69,10 +68,18 @@
                 $(this).remove()
 
                 });
+                count++;
                 $("#hadouken-count .count").text(count);
 
-            })
 
+                if(count>=5){
+                  $('#ryu-div .anna').attr('src', './images/anna2.gif');
+
+                }
+            })
+            $('#ryu-div .anna').click(function() {
+                $(this).attr('src', './images/anna3.gif');
+})
 
             // let's get started here when DOM is ready
         });

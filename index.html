@@ -1,45 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Ryu fires a hadouken</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <style>
-      body {
-        margin: 50px 0 50px 40px;
-      }
+        body {
+            margin: 50px 0 50px 40px;
+        }
 
-      #ryu-div {
-        margin-bottom: 40px;
-      }
+        #ryu-div {
+            margin-bottom: 40px;
+        }
 
-      #ryu-div .ryu {
-        cursor: pointer;
-      }
+        #ryu-div .ryu {
+            cursor: pointer;
+        }
 
-      #ryu-div .hadouken {
-        /* define the appropriate styles for the animated hadouken */
-      };
+        #ryu-div .hadouken {
+            position: absolute;
+            top: 190px;
+            left: 450px;
+            /* define the appropriate styles for the animated hadouken */
+        }
+        #ryu-div .terry {
+          position: absolute;
+          right: 0;
+        }
+
+        ;
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="ryu-div">
-      <img class="ryu" src="./images/ryu_stand_still.png">
+        <img class="ryu" src="./images/ryu_stand_still.png">
+        <img class="terry" src="./images/terry.gif" style="height: 500px">
+
     </div>
     <div id="hadouken-count">
-      Ryu has fired <span class="count">0</span> hadoukens
+        Ryu has fired <span class="count">0</span> hadoukens
     </div>
     <script>
-    $(document).ready(function() {
-      // define image URLs to use for Ryu
-      var ryuImages = {
-        animated: './images/ryu_animated.gif',
-        still:    './images/ryu_stand_still.png',
-        action:   './images/ryu_hadouken_pose.png'
-      };
+        $(document).ready(function() {
+            // define image URLs to use for Ryu
+            var ryuImages = {
+                animated: './images/ryu_animated.gif',
+                still: './images/ryu_stand_still.png',
+                action: './images/ryu_hadouken_pose.png'
 
-      // let's get started here when DOM is ready
-    });
+            };
+                    var count = 0;
+            $('#ryu-div .ryu').hover(function() {
+                    $(this).attr('src', ryuImages.animated);
+                },
+                function() {
+                    $(this).attr('src', ryuImages.still);
+                })
+            $('#ryu-div .ryu').click(function() {
+                count++;
+                $(this).attr('src', ryuImages.action);
+                var newImage = $('<img>');
+                newImage.attr('src', './images/hadouken.gif');
+                newImage.addClass('hadouken');
+                newImage.appendTo('#ryu-div');
+                newImage.animate({left: "+=750"}, 1000, function () {
+                $(this).remove()
+
+                });
+                $("#hadouken-count .count").text(count);
+
+            })
+
+
+            // let's get started here when DOM is ready
+        });
     </script>
-  </body>
+</body>
+
 </html>
